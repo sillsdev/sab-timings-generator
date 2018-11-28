@@ -8,7 +8,7 @@
 #Produces: Timing files split at the phrase or verse level,
 #depending on user input.
 
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -39,14 +39,14 @@ def converter(res):
         core = os.listdir(path_core)[0]
         #Get phrase markers from core script
         phrase_markers = retrieve_phrase_markers(
-                                                os.path.join(path_core, 
+                                                os.path.join(path_core,
                                                 core)
                                                 )
 
         #Run converter
         clt_to_txt(phrase_markers, res)
 
-        print('\nDone! Check the timings folder for your files')                                                    
+        print('\nDone! Check the timings folder for your files')
     except IndexError:
         print('ERROR: Please check core script is in core_script')
 
