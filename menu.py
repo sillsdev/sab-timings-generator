@@ -7,7 +7,7 @@
 #How to use: Runs automatically when running clt_to_txt_python
 #Produces: Results of type {verse: bool, book: int, chapter: int}
 
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, sys
 
