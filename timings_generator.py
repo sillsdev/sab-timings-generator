@@ -32,7 +32,7 @@ def main():
 #Check if core script is present and run
 def converter(res):
     
-    path_core = '.\\core_script\\'
+    path_core = 'core_script'
     
     try:
         #Check for core
@@ -52,8 +52,8 @@ def converter(res):
 
 def clt_to_txt(phrase_markers, res):
 
-    path_cue = '.\\cue_files\\'
-    path_timings = '.\\timings\\'
+    path_cue = 'cue_files'
+    path_timings = 'timings'
     files = os.listdir(path_cue)
 
     #Run for every cue file in cue_files
@@ -62,7 +62,7 @@ def clt_to_txt(phrase_markers, res):
         printProgressBar(files.index(filename), len(files)-1, prefix='Converting: {}'.format(filename), suffix='Completed')
 
         #Extract book title and chapter from filename
-        name = get_title(filename, res)
+        name, origname = get_titles(filename, res)
 
         with open(os.path.join(path_cue, filename)) as fi:
 
@@ -74,8 +74,8 @@ def clt_to_txt(phrase_markers, res):
 
             for num in results:
                 
-                if len(phrase_markers[name]) > 0:
-                    count = phrase_markers[name].pop(0)
+                if len(phrase_markers[origname]) > 0:
+                    count = phrase_markers[origname].pop(0)
                 else:
                     count = ''
                 
@@ -89,16 +89,24 @@ def clt_to_txt(phrase_markers, res):
             timing_file.close()
 
 #Extract book and chapter from filename
-def get_title(filename, res):
+def get_titles(filename, res):
     
     #Convert filename into list
     brkdwn = list_name(filename)
 
     book = brkdwn[res['book']]
+    origbook = book
+    # FCBH and SAB use different names for Titus and James
+    if book == "TTS":
+        book = "TIT"
+    if book == "JMS":
+        book = "JAS"
+
     chapter = brkdwn[res['chapter']]
     name = book + '_' + chapter
+    origname = origbook + '_' + chapter
 
-    return name
+    return name, origname
 
 #Extract time stamps from cue file and add to list
 #Cue file format:

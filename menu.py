@@ -25,10 +25,10 @@ def menu():
         try:
             check = ({'done': True, 'not done': None}
                     [input('Done / Not Done: ').lower()]
-                    ) and os.listdir('.\\cue_files\\') \
-                    and os.listdir('.\\core_script\\')
+                    ) and os.listdir('cue_files') \
+                    and os.listdir('core_script')
             if check:
-				break
+                break
             else:
                 print('Please add the correct files before continuing')
                 continue
@@ -48,7 +48,7 @@ def menu():
             print('Invalid input')
             continue
     
-    name = list_name(os.listdir('.\\cue_files\\')[0])
+    name = list_name(os.listdir('cue_files')[0])
 
     print('')
     print('\t'.join(str(i) for i in range(0, len(name))))
